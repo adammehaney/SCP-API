@@ -1,7 +1,7 @@
 import requests
 import json
 import threading
-import bs4 as beautifulsoup
+import bs4 as BeautifulSoup
 from flask import Flask, request, render_template
 
 class statuses:
@@ -29,11 +29,11 @@ if __name__ == "__main__":
 	Thread = threading.Thread(target=run)
 	Thread.start()
 
-@App.route('/api/scps/', methods=['GET'])
-def getScps():
-	print("get")
-	print(request)
-	return error(statuses.forbidden.status, statuses.forbidden.description)
+# @App.route('/api/scps/', methods=['GET'])
+# def getScps():
+# 	print("get")
+# 	print(request)
+# 	return error(statuses.forbidden.status, statuses.forbidden.description)
 
 @App.route('/api/', methods=['GET'])
 def loadDocumentation():
@@ -41,7 +41,27 @@ def loadDocumentation():
 
 @App.route('/api/scps/<scp>')
 def getScp(scp=None):
-    if scp:
-        return scp
+    if scp.isnumeric():
+        SCPLoad = requests.get(f"https://scp-wiki.wikidot.com/scp-{scp}")
+
+        if SCPLoad.ok:
+            Soup = BeautifulSoup(SCPLoad)
+            Soup.prettify()
+
+            Result = {
+                "found": False,
+                "scp_info": {
+                    "item_number": "",
+                    "object_class": "",
+                    "description": ""
+                }
+            }
+
+            Div = Soup.find('div', {'id': 'page-content'})
+            Children = Div.findChildren("div" , recursive=False)
+            for Child in Children:
+                return Child
+        else:
+            return SCPLoad
     else:
         error(statuses.badRequest.status, statuses.badRequest.description)
