@@ -1,7 +1,7 @@
 import requests
 import json
 import threading
-import bs4 as BeautifulSoup
+from bs4 import BeautifulSoup
 from flask import Flask, request, render_template
 
 class statuses:
