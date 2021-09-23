@@ -45,7 +45,7 @@ def getScp(scp=None):
         SCPLoad = requests.get(f"https://scp-wiki.wikidot.com/scp-{scp}")
 
         if SCPLoad.ok:
-            Soup = BeautifulSoup(SCPLoad.text)
+            Soup = BeautifulSoup(SCPLoad.text, 'html.parser')
             Soup.prettify()
 
             Result = {
