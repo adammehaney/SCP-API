@@ -26,6 +26,7 @@ code {
     height: auto;
     box-shadow: 1px 4px 12px black;
     padding: 10px 30px;
+    margin-bottom: 15px;
 }
 
 .nav {
@@ -34,7 +35,7 @@ code {
     display: flex;
     align-items: center;
     justify-content: left;
-    margin-bottom: 15px;
+    margin: 15px 0px;
 }
 
 .navbutton {
