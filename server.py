@@ -1,8 +1,9 @@
 import requests
 import json
 import threading
+import random
 from bs4 import BeautifulSoup
-from flask import Flask, request, render_template
+from flask import Flask, request, render_template, redirect
 
 class statuses:
 	class forbidden:
@@ -16,7 +17,7 @@ App = Flask('')
 
 @App.route('/')
 def home():
-	return "SCP API"
+	return redirect("/api/", code=301)
 
 def run():
 	App.run(host='0.0.0.0',port=8080)
@@ -41,7 +42,7 @@ def loadDocumentation():
 
 @App.route('/api/scps/<scp>')
 def getScp(scp=None):
-	if scp.isnumeric():
+	if int(scp):
 		SCPLoad = requests.get(f"https://scp-wiki.wikidot.com/scp-{scp}")
 
 		if SCPLoad.ok:
@@ -57,12 +58,34 @@ def getScp(scp=None):
 				}
 			}
 
-			Div = Soup.find('div', {'id': 'page-content'})
-        	Children = Div.findChildren("div" , recursive=False)
-        	for Child in Children:
-				if Child.text == "Item #:":
-					Result["item_number"] == "999"
+			Div = Soup.find_all('strong')
+
+			for Child in Div:
+				Text = Child.text.strip()
+				if Text == "Item #:":
+					Result["found"] = True
+					Result["scp_info"]["item_number"] = Child.next_sibling.text.strip()
+
+				if Text == "Object Class:":
+					Result["scp_info"]["object_class"] = Child.next_sibling.text.strip()
+
+				if Text == "Description:":
+					Sibling = Child.parent.find_next_sibling()
+					while True:				
+						if Sibling.name.strip() != "p":
+							break
+
+						Result["scp_info"]["description"] += Sibling.text.strip()
+
+						Sibling = Sibling.find_next_sibling()
+
+
+			return json.dumps(Result)
 		else:
 			return SCPLoad
 	else:
 		return error(statuses.badRequest.status, statuses.badRequest.description)
+
+@App.route('/api/randomscp/')
+def randomScp():
+	return getScp(random.randrange(6999))
