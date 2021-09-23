@@ -40,6 +40,10 @@ if __name__ == "__main__":
 def loadDocumentation():
 	return render_template('documentation/index.html')
 
+@App.route('/api/endpoints', methods=['GET'])
+def loadEndpoints():
+	return render_template('documentation/endpoints.html')
+
 @App.route('/api/scps/<scp>')
 def getScp(scp=None):
 	if int(scp):

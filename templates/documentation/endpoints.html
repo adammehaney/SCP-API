@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>SCP API - Documentation</title>
+		
+		<meta charset="UTF-8">
+		<meta name="author" content="Adam Mehaney">
+		<meta name="description" content="A simple Secure Contain Protect API.">
+		<meta name="tags" content="SCP, API, Documentation">
+		
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='stylesheets/style.css') }}">
+
+		<link rel="stylesheet" href="{{ url_for('static', filename='stylesheets/darkhighlight.css') }}">
+		<script src="{{ url_for('static', filename='stylesheets/highlight.min.js') }}"></script>
+		<script>hljs.highlightAll();</script>
+	</head>
+	<body>
+		<div class="nav">
+			<div class="navbutton">
+				<p class="navtext">Documentation</p>
+			</div>
+			<div class="navbutton">
+				<p class="navtext">API Endpoints</p>
+			</div>
+		</div>
+		<div class="maintext">
+			<h1>Introduction</h1>
+			<p>
+				The API is short and sweet, so let's get started.
+            </p>
+			<h2>Base URL</h2>
+            <code>https://scp-api.adxxmm.repl.co/api/</code>
+		</div>
+        <div class="maintext">
+			<h1>/scps</h1>
+			<p>
+				This endpoint allows you to get data about an SCP by its number.
+            </p>
+            <h2>Returns</h2>
+            <pre"><code class="language-json">{"found": (boolean), "scp_info": {"item_number": "", "object_class": "", "description": ""}})</code></pre>
+			<h2>Base URL</h2>
+            <code>https://scp-api.adxxmm.repl.co/api/</code>
+		</div>
+	</body>
+	<footer>
+		Copyright &copy; 2021 Adxm
+	</footer>
+</html>
