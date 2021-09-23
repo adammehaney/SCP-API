@@ -40,7 +40,7 @@ if __name__ == "__main__":
 def loadDocumentation():
 	return render_template('documentation/index.html')
 
-@App.route('/api/endpoints', methods=['GET'])
+@App.route('/api/endpoints/', methods=['GET'])
 def loadEndpoints():
 	return render_template('documentation/endpoints.html')
 
