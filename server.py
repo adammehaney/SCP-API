@@ -4,6 +4,8 @@ import threading
 import random
 from bs4 import BeautifulSoup
 from flask import Flask, request, render_template, redirect
+from flask_limiter import Limiter
+from flask_limiter.util import get_remote_address
 
 class statuses:
 	class forbidden:
@@ -14,6 +16,11 @@ class statuses:
 		description = "You did not input a valid SCP name or number!"
 
 App = Flask('')
+Limiter = Limiter(
+    App,
+    key_func=get_remote_address,
+    default_limits=["2/second"]
+)
 
 @App.route('/')
 def home():
@@ -45,6 +52,7 @@ def loadEndpoints():
 	return render_template('documentation/endpoints.html')
 
 @App.route('/api/scps/<scp>')
+@Limiter.limit("2/second")
 def getScp(scp=None):
 	if int(scp):
 		SCPLoad = requests.get(f"https://scp-wiki.wikidot.com/scp-{scp}")
@@ -91,5 +99,6 @@ def getScp(scp=None):
 		return error(statuses.badRequest.status, statuses.badRequest.description)
 
 @App.route('/api/randomscp/')
+@Limiter.limit("2/second")
 def randomScp():
 	return getScp(random.randrange(6999))

@@ -8,6 +8,7 @@ authors = ["Adxxmm <<>>"]
 python = "^3.8"
 Flask = "^2.0.1"
 beautifulsoup4 = "^4.10.0"
+Flask-Limiter = "^1.4"
 
 [tool.poetry.dev-dependencies]
 
