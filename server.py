@@ -27,7 +27,7 @@ def home():
 	return redirect("/api/", code=301)
 
 def run():
-	App.run(host='0.0.0.0',port=8080)
+	App.run(host='0.0.0.0', port=8080)
 
 def error(status, description):
 	return render_template('errors/error.html', status=status, description=description), int(status)
@@ -44,10 +44,12 @@ if __name__ == "__main__":
 # 	return error(statuses.forbidden.status, statuses.forbidden.description)
 
 @App.route('/api/', methods=['GET'])
+@Limiter.exempt
 def loadDocumentation():
 	return render_template('documentation/index.html')
 
 @App.route('/api/endpoints/', methods=['GET'])
+@Limiter.exempt
 def loadEndpoints():
 	return render_template('documentation/endpoints.html')
 

@@ -4,6 +4,7 @@
     --border-radius: 10px;
     --primary-color: rgba(0, 0, 0, 0.651);
     --secondary-color: rgb(34, 34, 34);
+	--transition-duration: 0.5s;
 }
 
 body {
@@ -21,8 +22,6 @@ code {
 .maintext {
     background-color: var(--secondary-color);
     border-radius: var(--border-radius);
-    /* margin-left: 5%;
-    margin-right: 5%; */
     height: auto;
     box-shadow: 1px 4px 12px black;
     padding: 10px 30px;
@@ -42,12 +41,29 @@ code {
     background-color: var(--secondary-color);
     border-radius: var(--border-radius);
     margin: 3px;
+	padding: 20px;
+}
+
+.navbutton:hover {
+	transition-duration: var(--transition-duration);
+	color: green;
 }
 
 .navtext {
+	text-decoration: none;
     color: inherit;
     font-family: inherit;
     font-weight: bold;
     padding: 0px 20px;
 }
 
+.title {
+	display: flex;
+    align-items: center;
+    justify-content: center;
+	flex-direction: column;
+}
+
+.programmaticallytitle {
+	font-weight: 100;
+}

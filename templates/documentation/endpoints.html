@@ -7,6 +7,7 @@
 		<meta name="author" content="Adam Mehaney">
 		<meta name="description" content="A simple Secure Contain Protect API.">
 		<meta name="tags" content="SCP, API, Documentation">
+		<meta name="theme-color" content="green">
 		
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='stylesheets/style.css') }}">
@@ -16,12 +17,16 @@
 		<script>hljs.highlightAll();</script>
 	</head>
 	<body>
+		<div class="title">
+			<h1>The SCP API</h1>
+			<h3 class="programmaticallytitle">Making accessing SCPs programmatically easier!</h3>
+		</div>
 		<div class="nav">
 			<div class="navbutton">
-				<p class="navtext">Documentation</p>
+				<a class="navtext" href="/api/">Documentation</a>
 			</div>
 			<div class="navbutton">
-				<p class="navtext">API Endpoints</p>
+				<a class="navtext" href="endpoints/">API Endpoints</a>
 			</div>
 		</div>
 		<div class="maintext">
@@ -33,12 +38,22 @@
             <code>https://scp-api.adxxmm.repl.co/api/</code>
 		</div>
         <div class="maintext">
-			<h1>/scps</h1>
+			<h1>/scps/<scp></h1>
 			<p>
 				This endpoint allows you to get data about an SCP by its number.
             </p>
 			<h2>Example</h2>
             <code>https://scp-api.adxxmm.repl.co/api/scps/999/</code>
+            <h3>Returns</h3>
+            <pre><code class="language-json">{"found": (boolean), "scp_info": {"item_number": "", "object_class": "", "description": ""}})</code></pre>
+		</div>
+		<div class="maintext">
+			<h1>/randomscp</h1>
+			<p>
+				This endpoint allows you to get a random SCP.
+            </p>
+			<h2>Example</h2>
+            <code>https://scp-api.adxxmm.repl.co/api/randomscp/</code>
             <h3>Returns</h3>
             <pre><code class="language-json">{"found": (boolean), "scp_info": {"item_number": "", "object_class": "", "description": ""}})</code></pre>
 		</div>
