@@ -3,7 +3,7 @@ import json
 import threading
 import random
 from bs4 import BeautifulSoup
-from flask import Flask, request, render_template, redirect
+from flask import Flask, render_template, redirect
 from flask_limiter import Limiter
 from flask_limiter.util import get_remote_address
 
@@ -19,23 +19,14 @@ App = Flask('')
 Limiter = Limiter(
     App,
     key_func=get_remote_address,
-    default_limits=["2/second"]
 )
 
 @App.route('/')
 def home():
 	return redirect("/api/", code=301)
 
-def run():
-	App.run(host='0.0.0.0', port=8080)
-
 def error(status, description):
 	return render_template('errors/error.html', status=status, description=description), int(status)
-
-if __name__ == "__main__":
-	print("System on")
-	Thread = threading.Thread(target=run)
-	Thread.start()
 
 # @App.route('/api/scps/', methods=['GET'])
 # def getScps():
@@ -104,3 +95,11 @@ def getScp(scp=None):
 @Limiter.limit("2/second")
 def randomScp():
 	return getScp(random.randrange(6999))
+
+def run():
+	App.run(host='0.0.0.0', port=8080)
+
+if __name__ == "__main__":
+	print("System on")
+	Thread = threading.Thread(target=run)
+	Thread.start()
