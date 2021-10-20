@@ -28,12 +28,6 @@ def home():
 def error(status, description):
 	return render_template('errors/error.html', status=status, description=description), int(status)
 
-# @App.route('/api/scps/', methods=['GET'])
-# def getScps():
-# 	print("get")
-# 	print(request)
-# 	return error(statuses.forbidden.status, statuses.forbidden.description)
-
 @App.route('/api/', methods=['GET'])
 @Limiter.exempt
 def loadDocumentation():
