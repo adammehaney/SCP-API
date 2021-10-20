@@ -3,7 +3,7 @@ import json
 import threading
 import random
 from bs4 import BeautifulSoup
-from flask import Flask, request, render_template, redirect
+from flask import Flask, render_template, redirect
 from flask_limiter import Limiter
 from flask_limiter.util import get_remote_address
 
@@ -19,7 +19,6 @@ App = Flask('')
 Limiter = Limiter(
     App,
     key_func=get_remote_address,
-    default_limits=["2/second"]
 )
 
 @App.route('/')
