@@ -26,16 +26,8 @@ Limiter = Limiter(
 def home():
 	return redirect("/api/", code=301)
 
-def run():
-	App.run(host='0.0.0.0', port=8080)
-
 def error(status, description):
 	return render_template('errors/error.html', status=status, description=description), int(status)
-
-if __name__ == "__main__":
-	print("System on")
-	Thread = threading.Thread(target=run)
-	Thread.start()
 
 # @App.route('/api/scps/', methods=['GET'])
 # def getScps():
@@ -104,3 +96,11 @@ def getScp(scp=None):
 @Limiter.limit("2/second")
 def randomScp():
 	return getScp(random.randrange(6999))
+
+def run():
+	App.run(host='0.0.0.0', port=8080)
+
+if __name__ == "__main__":
+	print("System on")
+	Thread = threading.Thread(target=run)
+	Thread.start()
